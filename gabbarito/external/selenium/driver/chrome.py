@@ -46,15 +46,15 @@ def get_chrome_driver() -> webdriver.Chrome:
     options.add_argument("--disable-gpu")
     service = ChromeService(executable_path=driver_path)
     try:
-        driver = webdriver.Chrome(service=service, options=options)
+        driver_instance = webdriver.Chrome(service=service, options=options)
     except Exception as e:
         Console().log(f"Error loading Chrome driver: {e}", style="bold red")
         raise
 
-    return driver
+    return driver_instance
 
 
-def close_driver(driver: webdriver.Chrome) -> None:
+def close_chrome_driver(driver: webdriver.Chrome) -> None:
     """Close the Selenium driver.
 
     Args:
