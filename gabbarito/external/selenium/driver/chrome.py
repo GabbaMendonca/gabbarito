@@ -68,14 +68,6 @@ def close_driver(driver: webdriver.Chrome) -> None:
         driver.quit()
         global driver_instance
         driver_instance = None
-        Console().log(
-            f"Driver closed successfully from path: {
-                os.path.join(
-                os.path.dirname(os.path.realpath(__file__)),
-                "chromedriver-win64",
-                "chromedriver.exe",
-                )
-            }"
-        )
+        Console().log("Driver closed successfully.")
     else:
         Console().log("Driver is already closed or not initialized.")
