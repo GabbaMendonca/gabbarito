@@ -1,3 +1,4 @@
+from rich.console import Console
 from selenium import webdriver
 
 from gabbarito.external.selenium.commands import commands
@@ -16,3 +17,4 @@ def open_farol(driver: webdriver.Chrome) -> None:
     """
     commands.open_new_page(driver, PageName.FAROL.value)
     commands.navigate_to_page(driver, URL_FAROL)
+    Console().print(f"Farol page opened: {URL_FAROL}", style="bold green")
