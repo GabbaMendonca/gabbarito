@@ -25,7 +25,7 @@ def open_farol(driver: webdriver.Chrome) -> None:
         return
 
     try:
-        commands.open_new_page(driver, PageName.FAROL.value)
+        # commands.open_new_page(driver, PageName.FAROL.value)
         commands.navigate_to_page(driver, URL_FAROL)
         Console().log(f"Farol page opened: {URL_FAROL}", style="bold green")
     except Exception as e:
