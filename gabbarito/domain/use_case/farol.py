@@ -13,10 +13,10 @@ def open_farol_use_case(driver):
     open_farol_infra(driver)
 
 
-def scrape_repairs_use_case(driver) -> List[Repair]:
+def scrape_repairs_use_case(infra, driver) -> List[Repair]:
     """Use case to scrape the farol page.
 
     Returns:
         List[Repair]: A list of Repair objects containing the scraped data.
     """
-    return scrape_repairs_infra(driver)
+    return infra(driver)

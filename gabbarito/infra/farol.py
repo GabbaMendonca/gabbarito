@@ -27,7 +27,7 @@ def _convert_to_repairs(data: List[dict]) -> List[Repair]:
     ]
 
 
-def scrape_repairs_infra(driver) -> List[Repair]:
+def scrape_repairs_infra(external, driver) -> List[Repair]:
     """Scrape the farol page using the Selenium driver."""
-    raw_data = scrape_farol(driver)
+    raw_data = external(driver)
     return _convert_to_repairs(raw_data)
