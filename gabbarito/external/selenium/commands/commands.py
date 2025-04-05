@@ -1,3 +1,4 @@
+from rich.console import Console
 from selenium import webdriver
 
 
@@ -13,6 +14,7 @@ def open_new_page(driver: webdriver.Chrome, page_name: str) -> None:
     """
     driver.execute_script(f"window.open('about:blank','{page_name}');")
     driver.switch_to.window(page_name)
+    Console().log(f"New page opened with name: {page_name}")
 
 
 def navigate_to_page(driver: webdriver.Chrome, url: str) -> None:
@@ -27,6 +29,7 @@ def navigate_to_page(driver: webdriver.Chrome, url: str) -> None:
     """
     driver.get(url)
     driver.switch_to.window(driver.current_window_handle)
+    Console().log(f"Navigated to URL: {url}")
 
 
 def replace_current_page(driver: webdriver.Chrome, page_name: str) -> None:
@@ -40,3 +43,4 @@ def replace_current_page(driver: webdriver.Chrome, page_name: str) -> None:
         None
     """
     driver.switch_to.window(page_name)
+    Console().log(f"Switched to page: {page_name}")
