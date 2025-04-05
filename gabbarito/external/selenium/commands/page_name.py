@@ -2,6 +2,6 @@ from enum import Enum
 
 
 class PageName(Enum):
-    OI360 = "oi360"
+    FAROL = "Farol"
     TWILIO = "twilio"
     FLEX4 = "flex4"

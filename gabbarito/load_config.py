@@ -21,7 +21,7 @@ SENHA_FLEX = os.getenv("SENHA_FLEX")
 # URLs
 TWILIO = config["URLS"]["TWILIO"]
 FLEX4 = [url.strip() for url in config["URLS"]["FLEX4"].split("\n") if url.strip()]
-SITE360 = config["URLS"]["SITE360"]
+URL_FAROL = config["URLS"]["SITE360"]
 
 # Path
 PATH_PERFIL_CHROME = config["PATHS"]["CAMINHO_PERFIL_CHROME"]
