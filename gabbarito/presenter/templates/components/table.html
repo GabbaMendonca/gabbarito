@@ -1,0 +1,32 @@
+{% macro table_rapairs(grid) %}
+<table class="table is-striped is-bordered is-hoverable is-fullwidth">
+  <thead>
+    <tr>
+      <th>Cliente</th>
+      <th>Ticket</th>
+      <th>Circuto</th>
+      <th>UF</th>
+      <th>Resumo</th>
+      <th>Posto</th>
+      <th>Abertura</th>
+      <th>Posicionamento</th>
+      <th>Prox Ação</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for r in grid %}
+    <tr>
+      <td>{{ r.cliente }}</td>
+      <td>{{ r.ticket }}</td>
+      <td>{{ r.circuito }}</td>
+      <td>{{ r.uf }}</td>
+      <td>{{ r.resumo }}</td>
+      <td>{{ r.posto }}</td>
+      <td>{{ r.abertura }}</td>
+      <td>{{ r.posicionamento }}</td>
+      <td>{{ r.prox_acao }}</td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% endmacro %}
