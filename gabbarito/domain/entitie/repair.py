@@ -20,6 +20,7 @@ class Repair:
         self.abertura = abertura
         self.posicionamento = posicionamento
         self.prox_acao = prox_acao
+        self.next_action_color = None
         self.ip = None
         self.status = None
 

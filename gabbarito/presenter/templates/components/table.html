@@ -24,7 +24,19 @@
       <td>{{ r.posto }}</td>
       <td>{{ r.abertura }}</td>
       <td>{{ r.posicionamento }}</td>
+      {% if r.next_action_color == '0' %}
+      <td class="is-danger">{{ r.prox_acao }}</td>
+      {% elif r.next_action_color == '1' %}
+      <td class="is-warning">{{ r.prox_acao }}</td>
+      {% elif r.next_action_color == '2' %}
+      <td class="is-info">{{ r.prox_acao }}</td>
+      {% elif r.next_action_color == '3' %}
+      <td class="is-success">{{ r.prox_acao }}</td>
+      {% elif r.next_action_color == '4' %}
+      <td class="is-primary">{{ r.prox_acao }}</td>
+      {% else %}
       <td>{{ r.prox_acao }}</td>
+      {% endif %}
     </tr>
     {% endfor %}
   </tbody>

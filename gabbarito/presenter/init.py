@@ -19,6 +19,17 @@ def run_flask() -> None:
     app.run()
 
 
+def scrape_fake():
+    injection = injector(scrape_repairs_infra, scrape_fake)
+    return farol.scrape_repairs_use_case(injection, None)
+
+
+def scrape_repairs():
+    driver = get_driver_use_case()
+    injection = injector(scrape_repairs_infra, scrape_farol)
+    return farol.scrape_repairs_use_case(injection, driver)
+
+
 def injector(infra, external):
     def inner_interface(*args, **kwargs):
         return infra(external, *args, **kwargs)
@@ -28,9 +39,8 @@ def injector(infra, external):
 
 @app.route("/", methods=["GET"])
 def hello_world():
-    driver = get_driver_use_case()
-    injection = injector(scrape_repairs_infra, scrape_farol)
-    repairs = farol.scrape_repairs_use_case(injection, driver)
+    # repairs = scrape_fake()
+    repairs = scrape_repairs()
 
     # New repairs
     new_p = ["FCRDE"]
@@ -45,7 +55,8 @@ def hello_world():
         repairs,
         omep_p,
     )
-    oemp = farol.ordenar_por_data(oemp_filter)
+    oemp_by_date = farol.ordenar_por_data(oemp_filter)
+    oemp = farol.atualizar_cor_prox_acao(oemp_by_date)
 
     # Vtal repairs
     vtal_p = ["TRIAV"]
@@ -53,7 +64,8 @@ def hello_world():
         repairs,
         vtal_p,
     )
-    vtal = farol.ordenar_por_data(vtal_filter)
+    vtal_by_date = farol.ordenar_por_data(vtal_filter)
+    vtal = farol.atualizar_cor_prox_acao(vtal_by_date)
 
     # Tade repairs
     tade_p = ["TADE"]
@@ -61,7 +73,8 @@ def hello_world():
         repairs,
         tade_p,
     )
-    tade = farol.ordenar_por_data(tade_filter)
+    tade_by_date = farol.ordenar_por_data(tade_filter)
+    tade = farol.atualizar_cor_prox_acao(tade_by_date)
 
     # Limbo repairs
     limbo_p = [
@@ -76,9 +89,10 @@ def hello_world():
         limbo_p,
     )
     limbo_by_posto = farol.separete_repair_by_posto(limbo_filter)
-    limbo = []
+    limbo_by_date = []
     for posto in limbo_by_posto:
-        limbo += farol.ordenar_por_data(limbo_by_posto[posto])
+        limbo_by_date += farol.ordenar_por_data(limbo_by_posto[posto])
+    limbo = farol.atualizar_cor_prox_acao(limbo_by_date)
 
     # Outhes repairs
     outhes_filter = farol.delete_repairs_by_postos(
@@ -86,9 +100,10 @@ def hello_world():
         new_p + omep_p + vtal_p + tade_p + limbo_p,
     )
     outhes_by_posto = farol.separete_repair_by_posto(outhes_filter)
-    outhes = []
+    outhes_by_date = []
     for posto in outhes_by_posto:
-        outhes += farol.ordenar_por_data(outhes_by_posto[posto])
+        outhes_by_date += farol.ordenar_por_data(outhes_by_posto[posto])
+    outhes = farol.atualizar_cor_prox_acao(outhes_by_date)
 
     grid = {
         "new": new,

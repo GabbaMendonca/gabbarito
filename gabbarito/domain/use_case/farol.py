@@ -1,5 +1,5 @@
 from collections import defaultdict
-from datetime import datetime
+from datetime import datetime, timedelta
 from typing import Dict, List
 
 from gabbarito.domain.entitie.repair import Repair
@@ -106,7 +106,48 @@ def ordenar_por_data(reparos: List[Repair]) -> List[Repair]:
 
     # Define uma função de chave para converter a data de string para datetime
     def extrair_data(reparo):
-        return datetime.strptime(reparo.prox_acao, "%d/%m/%Y %H:%M")
+        try:
+            return datetime.strptime(reparo.prox_acao, "%d/%m/%Y %H:%M")
+        except:
+            return datetime.strptime("01/01/2000 00:00", "%d/%m/%Y %H:%M")
 
     # Ordena os reparos com base na data de abertura
     return sorted(reparos, key=extrair_data)
+
+
+def atualizar_cor_prox_acao(reparos: List[Repair]) -> List[Repair]:
+    """
+    Atualiza a cor da próxima ação (cor_prox_acao) com base no tempo restante até 'prox_acao'.
+    As cores são definidas assim:
+    - Amarelo: Falta menos de 1 hora.
+    - Laranja: Falta menos de 15 minutos.
+    - Vermelho: Tempo já passou.
+
+    Args:
+        reparos (List[Repair]): Lista de objetos Repair para atualizar.
+    """
+    agora = datetime.now()
+
+    for reparo in reparos:
+        # Converter a string `prox_acao` para um objeto datetime
+        try:
+            data_prox_acao = datetime.strptime(reparo.prox_acao, "%d/%m/%Y %H:%M")
+        except:
+            data_prox_acao = datetime.strptime("01/01/2000 00:00", "%d/%m/%Y %H:%M")
+
+        # Calcula a diferença de tempo
+        diferenca = data_prox_acao - agora
+
+        # Atualiza a cor com base no tempo restante
+        if diferenca < timedelta(minutes=0):
+            reparo.next_action_color = "0"  # Já passou
+        elif diferenca <= timedelta(minutes=15):
+            reparo.next_action_color = "1"  # Menos de 15 minutos
+        elif diferenca <= timedelta(hours=1):
+            reparo.next_action_color = "2"  # Menos de 1 hora
+        elif diferenca <= timedelta(days=1):
+            reparo.next_action_color = "3"  # Menos de 1 hora
+        else:
+            reparo.next_action_color = "4"  # Ainda está longe (opcional)
+
+    return reparos
