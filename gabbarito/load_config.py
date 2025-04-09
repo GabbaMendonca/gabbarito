@@ -7,8 +7,6 @@ config = configparser.ConfigParser()
 config.read("config.ini")
 
 # URLs
-TWILIO = config["URLS"]["TWILIO"]
-FLEX4 = [url.strip() for url in config["URLS"]["FLEX4"].split("\n") if url.strip()]
 URL_FAROL = config["URLS"]["SITE360"]
 
 # Path
