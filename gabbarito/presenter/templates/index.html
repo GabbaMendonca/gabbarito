@@ -1,0 +1,46 @@
+{% import "components/table.html" as table %}
+
+
+<!-- <!DOCTYPE html> -->
+<html lang="en" data-theme="light">
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@1.0.2/css/bulma.min.css">
+
+  <title>Gabbarito</title>
+</head>
+
+<body>
+  <main class="container">
+    <section class="section">
+      <h1>NOVOS : {{ grid.new|length }}</h1>
+      {{ table.table_rapairs(grid.new) }}
+    </section>
+    <section class="section">
+      <h1>OEMP : {{ grid.oemp|length }}</h1>
+      {{ table.table_rapairs(grid.oemp) }}
+    </section>
+    <section class="section">
+      <h1>VTAL : {{ grid.vtal|length }}</h1>
+      {{ table.table_rapairs(grid.vtal) }}
+    </section>
+    <section class="section">
+      <h1>OUTROS : {{ grid.outhes|length }}</h1>
+      {{ table.table_rapairs(grid.outhes) }}
+    </section>
+    <section class="section">
+      <h1>TADE : {{ grid.tade|length }}</h1>
+      {{ table.table_rapairs(grid.tade) }}
+    </section>
+    <section class="section">
+      <h1>LIMBO : {{ grid.limbo|length }}</h1>
+      {{ table.table_rapairs(grid.limbo) }}
+    </section>
+  </main>
+
+</body>
+
+</data-theme=>
