@@ -6,8 +6,10 @@ from gabbarito.domain.use_case.driver import get_driver_use_case
 from gabbarito.external.farol.farol import scrape_farol
 from gabbarito.infra.farol import scrape_repairs_infra
 
+DEBUG = None
 
-def scrape_fake(driver):
+
+def scrape_farol_fake(driver):
     return dados_fake.reparos_fake
 
 
@@ -15,12 +17,19 @@ app = Flask(__name__)
 
 
 def run_flask() -> None:
-    # app.run(debug=True)
+    global DEBUG
+    DEBUG = False
     app.run()
 
 
+def run_flask_debug():
+    global DEBUG
+    DEBUG = True
+    app.run(debug=True, port=5001)
+
+
 def scrape_fake():
-    injection = injector(scrape_repairs_infra, scrape_fake)
+    injection = injector(scrape_repairs_infra, scrape_farol_fake)
     return farol.scrape_repairs_use_case(injection, None)
 
 
@@ -39,8 +48,10 @@ def injector(infra, external):
 
 @app.route("/", methods=["GET"])
 def hello_world():
-    # repairs = scrape_fake()
-    repairs = scrape_repairs()
+    if DEBUG:
+        repairs = scrape_fake()
+    else:
+        repairs = scrape_repairs()
 
     # New repairs
     new_p = ["FCRDE"]

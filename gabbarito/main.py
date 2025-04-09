@@ -1,7 +1,7 @@
 # gabbarito/main.py
 from rich.prompt import Prompt
 
-from gabbarito.presenter.init import run_flask
+from gabbarito.presenter.init import run_flask, run_flask_debug
 
 from .domain.use_case import farol
 from .domain.use_case.driver import close_driver_use_case, get_driver_use_case
@@ -42,3 +42,8 @@ def main():
 
     # Close the browser and exit the program
     close_driver(driver)
+
+
+def main_debug():
+    # Up flask server
+    run_flask_debug()
