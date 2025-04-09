@@ -183,10 +183,10 @@ dados_fake_do novo_360/
 fake_twilio/
 
 chrome-win64/
-chromedriver-win64/
+# chromedriver-win64/
 
 .wdm/
 
 run.bat
-dados_fake.py
+# dados_fake.py
 dados_fake_2.py
